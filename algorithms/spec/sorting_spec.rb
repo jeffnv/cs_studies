@@ -26,14 +26,9 @@ RSpec.shared_examples "a sorting algorithm" do |algorithm_name|
   end
 end
 
-describe "insertion sort" do
-  it_behaves_like "a sorting algorithm", :insertion_sort
-end
-
-describe "merge sort" do
-  it_behaves_like "a sorting algorithm", :merge_sort
-end
-
-describe "bubble_sort" do
-  it_behaves_like "a sorting algorithm", :bubble_sort
+include SortingAlgorithms
+SortingAlgorithms.instance_methods.each do |algorithm_name|
+  describe algorithm_name do
+    it_behaves_like "a sorting algorithm", algorithm_name
+  end
 end
