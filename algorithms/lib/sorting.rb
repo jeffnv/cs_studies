@@ -3,6 +3,10 @@ module SortingAlgorithms
   # good for small sequences
   # like sorting cards
   # empty left hand, pick up one from the pile and insert into place
+  def ruby_sort ary_to_sort
+    ary_to_sort.sort
+  end
+
   def insertion_sort ary_to_sort
     ary = ary_to_sort.dup
     (1...ary.length).each do |current_key_index|
@@ -55,6 +59,15 @@ module SortingAlgorithms
       end
     end
     ary
+  end
+
+  def quick_sort ary_to_sort
+    ary = ary_to_sort.dup
+    return ary if ary.length < 2
+    #choose a random pivot point
+    pivot = ary.sample
+    left, right = ary.partition { |el| el < pivot }
+    quick_sort(left) + quick_sort(right)
   end
 end
 
