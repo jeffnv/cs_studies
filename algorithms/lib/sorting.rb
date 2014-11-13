@@ -69,6 +69,41 @@ module SortingAlgorithms
     left, right = ary.partition { |el| el < pivot }
     quick_sort(left) + quick_sort(right)
   end
+
+  def heap_sort ary_to_sort
+    ary = ary_to_sort.dup
+    return ary if ary.empty?
+    heapify(ary)
+    (ary.length - 1).downto(0) do |end_idx|
+      ary[0], ary[end_idx] = ary[end_idx], ary[0]
+      siftDown(ary, 0, end_idx - 1)
+    end
+    ary
+  end
+  private
+  def heapify(a)
+    start = (a.length  - 2) / 2
+    while start >= 0 
+      siftDown(a, start, a.count - 1)
+      start -= 1
+    end
+  end
+  def siftDown(a, start, end_idx)
+    root = start
+    while (root * 2 + 1) <= end_idx do
+      child = root * 2 + 1
+      if child + 1 <= end_idx && a[child] < a[child + 1]
+        child = child + 1
+      end
+      if a[root] < a[child] 
+        a[root], a[child] = a[child], a[root]
+        root = child
+      else
+        return
+      end
+    end
+  end
+
 end
 
 
