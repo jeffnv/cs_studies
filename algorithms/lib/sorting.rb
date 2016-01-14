@@ -80,8 +80,10 @@ module SortingAlgorithms
     end
     ary
   end
+
   private
   def heapify(a)
+    #start is index of last parent
     start = (a.length  - 2) / 2
     while start >= 0 
       siftDown(a, start, a.count - 1)
@@ -90,14 +92,15 @@ module SortingAlgorithms
   end
   def siftDown(a, start, end_idx)
     root = start
-    while (root * 2 + 1) <= end_idx do
-      child = root * 2 + 1
-      if child + 1 <= end_idx && a[child] < a[child + 1]
-        child = child + 1
+    while (root * 2 + 1) <= end_idx do #while the root has at least one child
+      child = root * 2 + 1 #child's index
+      if child + 1 <= end_idx && a[child] < a[child + 1] #if there is a right child
+                                                         #and it's larger
+        child = child + 1#use the right child instead
       end
-      if a[root] < a[child] 
-        a[root], a[child] = a[child], a[root]
-        root = child
+      if a[root] < a[child] #if the element at the root is less than the child,
+        a[root], a[child] = a[child], a[root]#swap the elements
+        root = child#and process the child
       else
         return
       end
